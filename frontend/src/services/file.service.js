@@ -1,0 +1,22 @@
+import { apiRequest } from "./api.js";
+
+export async function uploadFile({ file, expiresInDays }) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("expiresInDays", expiresInDays);
+
+  return apiRequest("/files/upload", {
+    method: "POST",
+    body: formData
+  });
+}
+
+export async function getFiles() {
+  return apiRequest("/files");
+}
+
+export async function deleteFile(id) {
+  return apiRequest(`/files/${id}`, {
+    method: "DELETE"
+  });
+}
